@@ -1,0 +1,23 @@
+{
+  "short_name": "『𝕞𝕪.𝕨𝕚𝕗𝕖 🫠👑』",
+  "name": "Liquid Glass Gift App",
+  "icons": [
+    {
+      "src": "icon192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/project-wife-heda/",
+  "background_color": "#0a0010",
+  "display": "standalone",
+  "theme_color": "#0a0010",
+  "orientation": "portrait"
+}
+
+

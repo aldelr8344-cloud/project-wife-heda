@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>صفحة هبة 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0010">
+
+<style>
+  :root {
+    --pink: #ff2d9b;
+    --purple: #9b2dff;
+    --cyan: #00f0ff;
+    --gold: #ffd700;
+    --glass-bg: rgba(255,255,255,0.08);
+    --glass-border: rgba(255,255,255,0.18);
+    --blur: 30px;
+    --page-pad: clamp(10px, 4vw, 30px);
+    --card-pad: clamp(16px, 4vw, 32px);
+    --fs-base: clamp(13px, 2.2vw, 16px);
+    --fs-sm: clamp(11px, 1.8vw, 13px);
+    --fs-h3: clamp(18px, 4vw, 26px);
+    --fs-counter: clamp(20px, 5vw, 32px);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    background: #0a0010;
+    min-height: 100vh;
+    padding: var(--page-pad) var(--page-pad) clamp(40px,8vw,80px);
+    overflow-x: hidden;
+    position: relative;
+    font-size: var(--fs-base);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top right, #1a0030, transparent 60%),
+      radial-gradient(ellipse at bottom left, #000820, transparent 60%);
+    z-index: 0;
+  }
+
+  /* ── كانفاس الانفجار ── */
+  #celebCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+    pointer-events: none;
+  }
+
+  /* ── Orbs ── */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+    animation: float-orb 8s ease-in-out infinite;
+  }
+  .orb-1 { width: clamp(200px,50vw,400px); height: clamp(200px,50vw,400px); background: radial-gradient(circle, #ff2d9b, transparent); top: -100px; right: -100px; animation-delay: 0s; }
+  .orb-2 { width: clamp(180px,45vw,350px); height: clamp(180px,45vw,350px); background: radial-gradient(circle, #9b2dff, transparent); bottom: -80px; left: -80px; animation-delay: -3s; }
+  .orb-3 { width: clamp(150px,30vw,250px); height: clamp(150px,30vw,250px); background: radial-gradient(circle, #00f0ff, transparent); top: 50%; left: 50%; animation-delay: -5s; }
+
+  @keyframes float-orb {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(30px,-20px) scale(1.05); }
+    66% { transform: translate(-20px,15px) scale(0.95); }
+  }
+
+  /* ── نجوم ── */
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .star {
+    position: absolute; background: #fff; border-radius: 50%;
+    animation: twinkle var(--d, 3s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s); opacity: 0;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 0.8; transform: scale(1); }
+  }
+
+  /* ── قلوب عائمة ── */
+  .floating-hearts { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .heart {
+    position: absolute; bottom: -50px;
+    font-size: clamp(12px,3vw,22px);
+    animation: rise-heart linear infinite; opacity: 0;
+  }
+  @keyframes rise-heart {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+  }
+
+  /* ── الصفحات ── */
+  #page1, #page2 {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 460px;
+    margin: 0 auto; text-align: center;
+    transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+  }
+  #page2 { max-width: 640px; }
+
+  .page-enter { animation: pageEnter 0.7s cubic-bezier(.4,0,.2,1) forwards; }
+  @keyframes pageEnter {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+  }
+
+  /* ── الصورة الشخصية ── */
+  .profile-wrap {
+    width: clamp(110px,28vw,145px);
+    height: clamp(110px,28vw,145px);
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    display: block;
+    animation: pageEnter 0.8s ease forwards;
+  }
+  .profile-wrap::before {
+    content: '';
+    position: absolute; inset: -5px; border-radius: 50%;
+    background: conic-gradient(from 0deg, #ff2d9b, #9b2dff, #00f0ff, #ffd700, #ff2d9b);
+    animation: spin 3s linear infinite; z-index: -1;
+  }
+  .profile-wrap::after {
+    content: '';
+    position: absolute; inset: -8px; border-radius: 50%;
+    background: conic-gradient(from 180deg, #ff2d9b44, #9b2dff44, #00f0ff44, #ffd70044, #ff2d9b44);
+    animation: spin 4s linear infinite reverse; z-index: -2; filter: blur(5px);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .profile-wrap:hover::before { animation-duration: 1.5s; }
+
+  .profile-img {
+    width: 100%; height: 100%; border-radius: 50%;
+    object-fit: cover; border: 3px solid rgba(255,255,255,0.9);
+    transition: transform 0.4s ease; display: block;
+  }
+  .profile-wrap:hover .profile-img { transform: scale(1.06); }
+
+  /* ripple عند الضغط على الصورة */
+  .profile-wrap.ripple-anim::before { animation-duration: 0.5s !important; }
+  @keyframes ripplePulse {
+    0%   { box-shadow: 0 0 0 0   rgba(255,45,155,0.7); }
+    50%  { box-shadow: 0 0 0 18px rgba(255,45,155,0);   }
+    100% { box-shadow: 0 0 0 0   rgba(255,45,155,0);    }
+  }
+  .profile-wrap.ripple-anim .profile-img { animation: ripplePulse 0.5s ease; }
+
+  .profile-glow {
+    width: clamp(70px,18vw,100px); height: 15px;
+    background: radial-gradient(ellipse, rgba(255,45,155,0.6), transparent 70%);
+    margin: -5px auto 0; filter: blur(8px);
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+  @keyframes glow-pulse { 0%,100%{opacity:0.6;} 50%{opacity:1;} }
+
+  .profile-caption {
+    color: rgba(255,255,255,0.9);
+    font-size: var(--fs-sm); margin: 14px 0 22px;
+    font-weight: 500; letter-spacing: 0.5px;
+    text-shadow: 0 0 20px rgba(255,45,155,0.5);
+  }
+
+  /* ── بطاقة الباسورد ── */
+  .password-container {
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    border-radius: clamp(18px,4vw,28px);
+    padding: var(--card-pad);
+    width: 100%;
+    border: 1px solid rgba(0,240,255,0.3);
+    box-shadow: 0 0 0 1px rgba(0,240,255,0.1), 0 8px 40px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.15), 0 0 60px rgba(0,240,255,0.08);
+    position: relative; overflow: hidden;
+    animation: pageEnter 0.9s ease forwards; animation-delay: 0.15s; opacity: 0;
+  }
+  .password-container::before {
+    content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,240,255,0.8), transparent);
+  }
+
+  .card-title {
+    font-size: var(--fs-sm); font-weight: 600;
+    color: rgba(0,240,255,0.7); letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 20px; text-align: center;
+  }
+
+  .password-input-wrapper { position: relative; margin-bottom: 16px; }
+
+  #passwordInput {
+    width: 100%; height: clamp(48px,8vw,56px);
+    padding: 0 50px 0 20px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: clamp(12px,3vw,16px);
+    text-align: right; font-family: 'Cairo', sans-serif;
+    font-size: clamp(12px,2vw,14px); outline: none;
+    background: rgba(255,255,255,0.1); color: #fff;
+    transition: all 0.3s ease; backdrop-filter: blur(10px);
+  }
+  #passwordInput::placeholder { color: rgba(255,255,255,0.45); font-size: clamp(11px,1.8vw,13px); }
+  #passwordInput:focus {
+    border-color: rgba(211,14,203,0.7); background: rgba(255,255,255,0.13);
+    box-shadow: 0 0 0 3px rgba(211,14,203,0.15), 0 0 30px rgba(211,14,203,0.2);
+  }
+
+  .toggle-password {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    cursor: pointer; font-size: 18px; user-select: none;
+    z-index: 10; opacity: 0.7; transition: opacity 0.2s;
+  }
+  .toggle-password:hover { opacity: 1; }
+
+  /* ── زر الدخول ── */
+  .glass-btn {
+    width: 100%; border: none; background: transparent;
+    cursor: pointer; border-radius: clamp(12px,3vw,16px);
+    padding: 0; position: relative; overflow: hidden;
+  }
+  .glass-btn-inner {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255,45,155,0.15), rgba(255,45,155,0.05));
+    border: 1px solid rgba(255,45,155,0.5);
+    min-height: clamp(48px,8vw,56px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 12px 20px; border-radius: clamp(12px,3vw,16px);
+    font-weight: 700; font-size: clamp(12px,2vw,13px);
+    color: #fff; transition: all 0.3s ease; gap: 8px;
+    letter-spacing: 0.3px; overflow: hidden;
+  }
+  .glass-btn-inner::after {
+    content: ''; position: absolute; top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.5s ease; transform: skewX(-15deg);
+  }
+  .glass-btn:hover .glass-btn-inner {
+    border-color: rgba(255,45,155,0.9);
+    box-shadow: 0 0 25px rgba(255,45,155,0.3), 0 0 50px rgba(255,45,155,0.1);
+    transform: translateY(-2px);
+  }
+  .glass-btn:hover .glass-btn-inner::after { left: 150%; }
+  .glass-btn:active .glass-btn-inner { transform: translateY(0) scale(0.99); }
+
+  .status-msg {
+    margin-top: 14px; font-size: var(--fs-sm);
+    color: rgba(255,255,255,0.9); min-height: 22px;
+    font-weight: 600; line-height: 1.5; transition: all 0.3s ease;
+  }
+  .status-msg.error { color: #ff6b6b; }
+  .status-msg.success { color: #51cf66; }
+
+  /* ── زر الموسيقى ── */
+  .music-control-floating {
+    position: fixed; bottom: clamp(15px,3vw,20px); right: clamp(15px,3vw,20px);
+    width: clamp(40px,8vw,50px); height: clamp(40px,8vw,50px);
+    border-radius: 50%;
+    background: rgba(255,45,155,0.85);
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: white; cursor: pointer; z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    font-size: clamp(14px,3vw,18px);
+  }
+  .music-control-floating:hover { transform: scale(1.1); background: rgba(255,45,155,1); }
+
+  /* زر الموسيقى يهز لما الموسيقى مش شغالة */
+  @keyframes musicWiggle {
+    0%,100% { transform: rotate(0deg)   scale(1); }
+    20%      { transform: rotate(-12deg) scale(1.1); }
+    40%      { transform: rotate(12deg)  scale(1.1); }
+    60%      { transform: rotate(-8deg)  scale(1.05); }
+    80%      { transform: rotate(8deg)   scale(1.05); }
+  }
+  .music-control-floating.wiggle { animation: musicWiggle 0.6s ease; }
+
+  /* ── PAGE 2 ── */
+  .glass-card {
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    border-radius: clamp(18px,4vw,28px);
+    padding: var(--card-pad);
+    border: 1px solid rgba(255,0,170,0.3);
+    color: #fff; line-height: 2.2;
+    font-size: var(--fs-base); margin-bottom: 20px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.12),
+                0 0 60px rgba(255,0,170,0.06);
+    animation: pageEnter 0.7s ease forwards;
+  }
+  .glass-card::before {
+    content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,0,170,0.7), transparent);
+  }
+  .glass-card h3 {
+    text-align: center; margin-bottom: 22px;
+    font-size: var(--fs-h3); font-weight: 900;
+    background: linear-gradient(135deg, #ff2d9b, #ffd700, #ff2d9b);
+    background-size: 200% auto;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer-text 3s linear infinite;
+  }
+  @keyframes shimmer-text { to { background-position: 200% center; } }
+
+  .text-pink { color: #ff6b9d; font-weight: 700; }
+  .text-gold { color: #ffd700; font-weight: 700; }
+  .text-cyan { color: #00f0ff; font-weight: 700; }
+
+  /* ── بطاقة الوعد ── */
+  .promise-box {
+    background: rgba(255,45,155,0.08);
+    border-radius: clamp(14px,3vw,20px);
+    padding: clamp(16px,3vw,22px) clamp(14px,3vw,20px);
+    margin: 22px 0;
+    border: 1px solid rgba(255,45,155,0.3);
+    border-right: 4px solid #ffd700;
+    position: relative; overflow: hidden;
+  }
+  .promise-box-title {
+    font-size: var(--fs-sm); color: #ffd700; font-weight: 700;
+    letter-spacing: 1px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 6px; justify-content: flex-end;
+  }
+
+  /* ── بوكس التشجيع ── */
+  .motivational-box {
+    background: rgba(255,255,255,0.05);
+    border-radius: clamp(12px,3vw,16px);
+    padding: clamp(16px,3vw,22px) clamp(14px,3vw,20px);
+    margin: 22px 0;
+    border: 1px solid rgba(255,45,155,0.2);
+    border-right: 4px solid #ff6b9d; text-align: right;
+  }
+
+  .energy-charge-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 15px; padding: clamp(10px,2vw,14px) clamp(16px,3vw,24px);
+    border-radius: clamp(10px,2vw,12px);
+    background: linear-gradient(135deg, #ff2d9b, #9b2dff);
+    color: white; font-weight: 700; font-size: clamp(12px,2vw,14px);
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255,45,155,0.4);
+    transition: all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+    user-select: none; font-family: 'Cairo', sans-serif;
+  }
+  .energy-charge-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(255,45,155,0.6);
+  }
+  .energy-charge-btn:active { transform: translateY(0) scale(0.98); }
+
+  /* ── كارت الرسائل ── */
+  .lucky-card {
+    background: linear-gradient(135deg, rgba(255,45,155,0.15), rgba(155,45,255,0.15));
+    border: 2px dashed rgba(255,45,155,0.5);
+    border-radius: clamp(16px,4vw,24px);
+    padding: clamp(18px,4vw,25px) clamp(14px,3vw,20px);
+    margin: 30px auto 20px; cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+    position: relative; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(255,45,155,0.15);
+  }
+  .lucky-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: #ff2d9b;
+    box-shadow: 0 15px 35px rgba(255,45,155,0.3);
+  }
+  .lucky-card-title {
+    font-size: clamp(15px,3.5vw,19px); font-weight: 800;
+    color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.4); margin-bottom: 12px;
+  }
+  .lucky-card-desc {
+    font-size: var(--fs-sm); color: rgba(255,255,255,0.7); margin-bottom: 15px;
+  }
+  .lucky-card-display {
+    background: rgba(10,0,16,0.8); border-radius: clamp(12px,3vw,16px);
+    padding: clamp(14px,3vw,20px) clamp(12px,3vw,15px);
+    min-height: 90px; display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;
+  }
+  .lucky-card-text {
+    font-size: clamp(13px,2.5vw,15.5px); font-weight: 700;
+    color: #fff; line-height: 1.6; text-align: center;
+    transition: opacity 0.25s ease;
+  }
+
+  /* ── عداد الوقت مع Flip ── */
+  .counter-box {
+    background: rgba(255,45,155,0.05);
+    border-radius: clamp(16px,4vw,24px);
+    padding: clamp(16px,4vw,24px) clamp(10px,3vw,15px);
+    margin: 25px 0;
+    border: 1px solid rgba(255,45,155,0.25);
+    box-shadow: 0 0 30px rgba(255,45,155,0.05);
+  }
+  .counter-title {
+    font-size: clamp(11px,2vw,14px); font-weight: 700; color: #ff6b9d;
+    margin-bottom: 18px; display: flex; justify-content: center;
+    align-items: center; gap: 6px; line-height: 1.5; text-align: center;
+  }
+  .counter-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(6px,2vw,10px);
+  }
+  .counter-item {
+    background: rgba(10,0,16,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: clamp(10px,2vw,14px);
+    padding: clamp(8px,2vw,12px) 5px;
+    overflow: hidden; position: relative;
+  }
+
+  /* flip animation */
+  .counter-number {
+    font-size: var(--fs-counter); font-weight: 900;
+    color: #ffd700; text-shadow: 0 0 15px rgba(255,215,0,0.4);
+    line-height: 1.2; display: block;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+  }
+  .counter-number.flip-out {
+    transform: rotateX(90deg) translateY(-10px);
+    opacity: 0;
+  }
+  .counter-number.flip-in {
+    animation: flipIn 0.18s ease forwards;
+  }
+  @keyframes flipIn {
+    from { transform: rotateX(-90deg) translateY(10px); opacity: 0; }
+    to   { transform: rotateX(0deg)   translateY(0);    opacity: 1; }
+  }
+  .counter-label {
+    font-size: clamp(9px,1.8vw,11px); color: rgba(255,255,255,0.6); margin-top: 4px;
+  }
+
+  /* ── زر الرجوع ── */
+  .back-btn {
+    display: block; width: 100%; max-width: 340px;
+    margin: 20px auto 0; padding: 0; border: none;
+    background: transparent; cursor: pointer; border-radius: clamp(12px,3vw,16px);
+  }
+  .back-btn-inner {
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    padding: clamp(12px,2.5vw,15px) 20px; border-radius: clamp(12px,3vw,16px);
+    font-weight: 700; color: #fff; font-size: clamp(12px,2vw,14px);
+    border: 1px solid rgba(255,45,155,0.4);
+    box-shadow: 0 0 20px rgba(255,45,155,0.1), inset 0 1px 0 rgba(255,255,255,0.1);
+    transition: all 0.3s ease; font-family: 'Cairo', sans-serif;
+  }
+  .back-btn:hover .back-btn-inner {
+    border-color: rgba(255,45,155,0.8);
+    box-shadow: 0 0 30px rgba(255,45,155,0.25); transform: translateY(-2px);
+  }
+
+  .footer-dots { display: flex; justify-content: center; gap: 8px; margin-top: 25px; }
+  .footer-dots span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.25); display: block;
+  }
+  .footer-dots span:nth-child(2) { background: rgba(255,45,155,0.6); }
+
+  /* ── Popup (وسط الشاشة + overlay) ── */
+  .popup-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    z-index: 9990; display: none;
+    align-items: center; justify-content: center;
+  }
+  .popup-overlay.show { display: flex; animation: fadeOverlay 0.3s ease forwards; }
+  @keyframes fadeOverlay { from { opacity: 0; } to { opacity: 1; } }
+
+  .popup-msg {
+    background: rgba(15,5,30,0.97);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    padding: clamp(18px,4vw,24px) clamp(20px,5vw,36px);
+    border-radius: clamp(20px,4vw,30px);
+    color: #fff; font-weight: 700;
+    font-size: clamp(13px,2.5vw,15px);
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1);
+    z-index: 9991;
+    border: 1px solid rgba(255,45,155,0.4);
+    width: min(88%, 380px);
+    line-height: 1.8;
+    display: none;
+    transform: scale(0.8); opacity: 0;
+  }
+  .popup-msg.show {
+    display: block;
+    animation: popIn 0.4s cubic-bezier(.34,1.56,.64,1) forwards;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1);   }
+  }
+  @keyframes popOut {
+    from { opacity: 1; transform: scale(1);   }
+    to   { opacity: 0; transform: scale(0.85); }
+  }
+  .popup-msg.hide { animation: popOut 0.3s ease forwards; }
+
+  /* مؤشر تحميل */
+  .loading-dots { display: none; justify-content: center; gap: 6px; margin-top: 14px; }
+  .loading-dots.show { display: flex; }
+  .loading-dots span {
+    width: 7px; height: 7px; border-radius: 50%; background: #ff6b9d;
+    animation: bounce-dot 1.2s ease-in-out infinite;
+  }
+  .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce-dot {
+    0%,80%,100% { transform: translateY(0); opacity: 0.5; }
+    40% { transform: translateY(-8px); opacity: 1; }
+  }
+
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+  }
+  @keyframes pulse-success {
+    0%   { box-shadow: 0 0 0 0   rgba(255,107,157,0.5); }
+    70%  { box-shadow: 0 0 0 14px rgba(255,107,157,0);   }
+    100% { box-shadow: 0 0 0 0   rgba(255,107,157,0);    }
+  }
+  .shake { animation: shake 0.45s ease; }
+  .pulse { animation: pulse-success 0.7s ease; }
+  .hidden { display: none !important; }
+
+  /* ── تابلت ── */
+  @media (min-width: 600px) and (max-width: 1023px) {
+    #page1 { max-width: 420px; margin-top: 4vh; }
+    #page2 { max-width: 600px; margin-top: 2vh; }
+    body   { padding: 40px 30px 60px; }
+  }
+
+  /* ── ديسكتوب ── */
+  @media (min-width: 1024px) {
+    body { padding: 60px 20px 80px; }
+    #page1 { max-width: 440px; margin-top: 5vh; }
+    #page2 { max-width: 680px; margin-top: 3vh; }
+    .glass-card { font-size: 16px; line-height: 2.3; }
+  }
+
+  /* ── موبايل صغير ── */
+  @media (max-width: 360px) {
+    .counter-grid { gap: 5px; }
+    .glass-card { padding: 14px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="celebCanvas"></canvas>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="stars" id="stars"></div>
+<div class="floating-hearts" id="heartsContainer"></div>
+
+<audio id="bgMusic" src="ام شعر حرير.mp3" loop preload="auto"></audio>
+
+<div id="musicToggle" class="music-control-floating hidden" onclick="togglePlayMusic()">
+  <i class="fa-solid fa-volume-high" id="musicIcon"></i>
+</div>
+
+<!-- overlay للبوب آب -->
+<div class="popup-overlay" id="popupOverlay" onclick="closeCurrentPopup()">
+  <div class="popup-msg" id="popup1">
+    أنا هنا يا هبة دايماً جنبك 😂<br>
+    ببص عليكي من بعيد وبموت فيكي 🫣💕
+  </div>
+  <div class="popup-msg" id="popup2">  صباح النور والجمال يا روحي🧸💖<br>
+    أنا فخور بيكي وبكل خطوة بتعمليها 🌟🧸
+  </div>
+  <div class="popup-msg" id="popup2_img">
+    عارف إنك رخمة وعنيدة بس بموت في رخامتك يا مزتي 😂💕<br>
+    ربنا يوفقك ويسعد قلبك الطيب 🤍✨
+  </div>
+  <div class="popup-msg" id="popup_energy">
+    <span id="popupEnergyMsg"></span>
+  </div>
+</div>
+
+<!-- ========== PAGE 1 ========== -->
+<div id="page1">
+  <div class="profile-wrap" id="profileWrap1" onclick="handleProfileClick1(event)">
+    <img src="https://files.catbox.moe/te27ex.jpg" alt="Profile" class="profile-img"/>
+  </div>
+  <div class="profile-glow"></div>
+  <p class="profile-caption">✨ 🫣 اضغطي على صورتك يا عمري 🫣✨</p>
+
+  <div class="password-container">
+    <p class="card-title">✦ ادخلي كلمة السر يا حبيبتي ✦</p>
+    <div class="password-input-wrapper">
+      <input type="password" id="passwordInput" placeholder="اكتبي كلمة السر يا حياتي 🤫🔑" autocomplete="off">
+      <span class="toggle-password" onclick="togglePassword()">👁</span>
+    </div>
+    <button class="glass-btn" onclick="checkPassword()">
+      <div class="glass-btn-inner">💖 دوسي هنا وادخلي يا روحي 💖</div>
+    </button>
+    <div class="status-msg" id="statusMsg"></div>
+    <div class="loading-dots" id="loadingDots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="footer-dots"><span></span><span></span><span></span></div>
+</div>
+
+<!-- ========== PAGE 2 ========== -->
+<div id="page2" class="hidden">
+  <div class="profile-wrap" id="profileWrap2" style="border: none;" onclick="handleProfileClick2(event)">
+    <img src="https://files.catbox.moe/oo2zmk.jpg" alt="Profile 2" class="profile-img"/>
+  </div>
+  <div class="profile-glow" style="background: radial-gradient(ellipse, rgba(255,45,155,0.5), transparent 70%);"></div>
+
+  <div class="glass-card" style="margin-top: 20px;">
+    <h3> صباح / مساء الجمال والحلويات ي مزتي </h3>
+
+    <p>
+      أهلاً يا <span class="text-pink">أجمل حاجة في دنيتي كلها ونور عيوني 💞</span><br>
+      صحيتي عشان تذاكري وأول حاجة عملتيها إنك فتحتِ الموقع ده؟<br>
+      <span class="text-gold">ده بالظبط اللي بيخليني أحس إن مفيش حد زيك في الكون كله، وإنك مالكة قلبي بالكامل ومفيش بديل عنك أبداً يا عمري 👑✨</span>
+    </p>
+
+    <br>
+
+    <p>
+      بحبك يا هبة.. مش بس كلام وتمني 💍❤️‍🔥<br>
+      بحبك بكل حالاتك وتفاصيلك اللي بعشقها، بضحكتك اللي بتنورلي دنيتي وبتنسيني كل الهموم، برخامتك وعنادك اللي بيموتني ضحك ويخليني أحبك أكتر، وجمالك الساحر حتى وأنتِ عصبانة ومضغوطة من المذاكرة 😂💓<br>
+      وبحبك لأنك ساكنة في بالي وعقلي وقلبي في كل ثانية ودقيقة بتعدي عليا في اليوم، مفيش فكرة بتمر إلا وأنتِ أساسها يا روحي 🌚. 🧸
+    </p>
+
+    <br>
+
+    <div class="counter-box">
+      <div class="counter-title">
+        <span>⏱️</span>
+        <span>الوقت اللي عدا من أول ما عرفتك يا حته مني لحد اللحظة دي🥺💝</span>
+      </div>
+      <div class="counter-grid">
+        <div class="counter-item">
+          <span class="counter-number" id="count-days">0</span>
+          <div class="counter-label">يوم</div>
+        </div>
+        <div class="counter-item">
+          <span class="counter-number" id="count-hours">0</span>
+          <div class="counter-label">ساعة</div>
+        </div>
+        <div class="counter-item">
+          <span class="counter-number" id="count-minutes">0</span>
+          <div class="counter-label">دقيقة</div>
+        </div>
+        <div class="counter-item">
+          <span class="counter-number" id="count-seconds">0</span>
+          <div class="counter-label">ثانية</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motivational-box">
+      <p>
+        📚 <span class="text-pink"><strong>يا دكتورة المستقبل الشطورة..🩺❤️‍🔥</strong></span><br>
+        أنا عارف ومقدر جداً إن تالتة ثانوي  صعبة، وإن الامتحانات قربت والضغط والتوتر واصلين لآخرهم 🥺..<br>
+        بس أنا شايف فيكي كمية قوة وصبر وعزيمة تخليني واثق مليون في المية إنك هتقدري تتخطي الصعب ده كله، وتفرقعي الدنيا نجاح وتفوق، وتوصلي للمكانة اللي بتحلمي بيها وتثبتي لكل الدنيا شطارتك 💃🏻🎊👑.<br>
+        <span class="text-gold">عايزك تاخدي الأمور ببساطة، تذاكري وتعملي اللي عليكي، وتفتكري دايماً إن فيه قلب فخور بيكي جداً وواقف في ضهرك، بيدعمك ويدعيلك وبيموت في تراب رجليكي 💍✨🧸</span>
+      </p>
+      <button class="energy-charge-btn" onclick="triggerMassiveEmojiExplosion(event)">
+        <span>✨</span> دوسي وشوفي الاحتفال ي مزتي 🫦❤️‍🔥
+      </button>
+    </div>
+
+    <div class="promise-box">
+      <div class="promise-box-title">⭐ وعد وعهد دائم ليكي</div>
+      <p>
+        أنا جمبك ومعاكي يا هبة في كل لحظة، في سهرك، في تعبك، وفي فرحك كأننا سوا بالظبط وعمري ما هسيبك لوحدك 🥺🤍<br>
+        كل ما تحسي بزهق أو قلق من المذاكرة.. افتحي الموقع ده دايماً وافتكري إنك مش لوحدك للحظة واحدة، وإن حبنا أقوى من أي ظرف.<br>
+        <span class="text-gold">أنا هنا عشانك.. دايماً وأبدًا يا روحي وسندك الأول والأخير 🫀✨</span>
+      </p>
+    </div>
+
+    <div class="lucky-card" onclick="pullRandomMessage(event)">
+      <div class="lucky-card-title">✨ اختاري رسالتك ي مامي 🫦🥺 ✨</div>
+      <div class="lucky-card-desc">اضغطي هنا في كل مرة عشان تسحبي رسالة حب وتشجيع جديدة مخصوص ليكي ومعاها انفجار حب 💞💖</div>
+      <div class="lucky-card-display">
+        <div class="lucky-card-text" id="luckyCardText">
+          دوسي عشان تشوفي رسالك العشوائيه ي قمر 💍🌚
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center; color: rgba(255,255,255,0.7); font-size: clamp(11px,2vw,13px); margin-top: 25px;">
+      💌 <em>من حد بيعشقك وبيموت في تفاصيلك وبيدعمك لآخر العمر 💍💋</em> 💌
+    </p>
+  </div>
+
+  <button class="back-btn" onclick="goBack()">
+    <div class="back-btn-inner">⟵ الصفحة الرئيسية</div>
+  </button>
+
+  <div class="footer-dots" style="margin-top:30px;">
+    <span></span><span style="background:rgba(255,45,155,0.6);"></span><span></span>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   CANVAS
+══════════════════════════════════════════ */
+const canvas  = document.getElementById('celebCanvas');
+const ctx     = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+/* ══════════════════════════════════════════
+   EMOJI PARTICLE  –  محسّن بالكامل
+══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   EMOJI PARTICLE – نسخة سريعة بـ Sprite Cache
+   كل إيموجي بيترسم مرة واحدة على canvas صغير
+   وبعد كل ده drawImage بدل fillText (أسرع بكتير)
+══════════════════════════════════════════ */
+const EMOJIS = ['🥳','♥','😍','🔥','🥺','💓','💝','💘','💕','🌚','💖',
+                '❤️‍🔥','💗','💍','💞','💋','🎀','❤','✨','🧸','💊','🎉'];
+
+const SPRITE_SIZES = [16, 22, 28, 34, 40, 46];
+const spriteCache = {};
+
+function getSprite(emoji, size) {
+  let nearest = SPRITE_SIZES[0], best = Infinity;
+  for (const s of SPRITE_SIZES) {
+    const d = Math.abs(s - size);
+    if (d < best) { best = d; nearest = s; }
+  }
+  if (!spriteCache[emoji]) spriteCache[emoji] = {};
+  if (spriteCache[emoji][nearest]) return { canvas: spriteCache[emoji][nearest], size: nearest };
+
+  const pad = Math.ceil(nearest * 0.35);
+  const dim = nearest + pad * 2;
+  const off = document.createElement('canvas');
+  off.width = dim; off.height = dim;
+  const octx = off.getContext('2d');
+  octx.shadowBlur  = nearest * 0.3;
+  octx.shadowColor = '#ff2d9b';
+  octx.font         = `${nearest}px Cairo, sans-serif`;
+  octx.textAlign    = 'center';
+  octx.textBaseline = 'middle';
+  octx.fillText(emoji, dim / 2, dim / 2);
+
+  spriteCache[emoji][nearest] = off;
+  return { canvas: off, size: nearest };
+}
+
+function warmupSprites() {
+  EMOJIS.forEach(em => SPRITE_SIZES.forEach(sz => getSprite(em, sz)));
+}
+
+let particles = [];
+
+class EmojiParticle {
+  constructor(x, y, opts = {}) {
+    this.x = x; this.y = y;
+    const emoji = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+
+    const angle = opts.angle !== undefined ? opts.angle : Math.random() * Math.PI * 2;
+    const speed = opts.speed !== undefined ? opts.speed : (Math.random() * 14 + 7);
+
+    this.vx = Math.cos(angle) * speed;
+    this.vy = Math.sin(angle) * speed;
+    this.gravity = 0.25;
+    this.drag = 0.96;
+    this.alpha = 1;
+    this.decay = Math.random() * 0.008 + 0.004;
+    this.rotation = Math.random() * 360;
+    this.spin = Math.random() * 14 - 7;
+    this.spinDrag = 0.97;
+
+    const size = opts.size || (Math.random() * 22 + 16);
+    const sprite = getSprite(emoji, size);
+    this.sprite = sprite.canvas;
+    this.spriteSize = sprite.canvas.width;
+    this.scale = size / sprite.size;
+  }
+
+  update() {
+    this.vx *= this.drag;
+    this.vy *= this.drag;
+    this.vy += this.gravity;
+    this.x += this.vx;
+    this.y += this.vy;
+    this.alpha -= this.decay;
+    this.rotation += this.spin;
+    this.spin *= this.spinDrag;
+    return this.alpha > 0;
+  }
+
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, this.alpha);
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation * Math.PI / 180);
+    const dim = this.spriteSize * this.scale;
+    ctx.drawImage(this.sprite, -dim / 2, -dim / 2, dim, dim);
+    ctx.restore();
+  }
+}
+
+function burstFrom(x, y, count, speedRange, sizeRange) {
+  for (let i = 0; i < count; i++) {
+    const angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5) * 0.5;
+    const speed = speedRange[0] + Math.random() * (speedRange[1] - speedRange[0]);
+    const size  = sizeRange[0]  + Math.random() * (sizeRange[1]  - sizeRange[0]);
+    particles.push(new EmojiParticle(x, y, { angle, speed, size }));
+  }
+}
+
+/* الانفجار الضخم – موزّع على عدة requestAnimationFrame عشان مفيش وقفة */
+function triggerMassiveEmojiExplosion(e) {
+  playWebOscillatorSound();
+
+  const cx = e?.clientX || window.innerWidth  / 2;
+  const cy = e?.clientY || window.innerHeight / 2;
+  const W = window.innerWidth, H = window.innerHeight;
+
+  const spawnQueue = [];
+
+  spawnQueue.push(() => burstFrom(cx, cy, 26, [10, 20], [26, 46]));
+  spawnQueue.push(() => burstFrom(cx, cy, 26, [10, 20], [26, 46]));
+  spawnQueue.push(() => burstFrom(cx, cy, 28, [10, 20], [26, 46]));
+  spawnQueue.push(() => burstFrom(cx, cy, 25, [6, 16], [16, 26]));
+  spawnQueue.push(() => burstFrom(cx, cy, 25, [6, 16], [16, 26]));
+
+  const corners = [
+    [0, 0,   Math.PI * 0.25],
+    [W, 0,   Math.PI * 0.75],
+    [0, H,  -Math.PI * 0.25],
+    [W, H,  -Math.PI * 0.75],
+  ];
+  corners.forEach(([cx2, cy2, baseAngle]) => {
+    spawnQueue.push(() => {
+      for (let i = 0; i < 18; i++) {
+        const spread = (Math.random() - 0.5) * (Math.PI * 0.6);
+        const angle = baseAngle + spread;
+        const speed = 9 + Math.random() * 13;
+        const size  = 18 + Math.random() * 24;
+        particles.push(new EmojiParticle(cx2, cy2, { angle, speed, size }));
+      }
+    });
+  });
+
+  const edges = [
+    [W/2, 0,   Math.PI/2],
+    [W/2, H,  -Math.PI/2],
+    [0,   H/2, 0],
+    [W,   H/2, Math.PI],
+  ];
+  edges.forEach(([ex, ey, ba]) => {
+    spawnQueue.push(() => {
+      for (let i = 0; i < 14; i++) {
+        const angle = ba + (Math.random() - 0.5) * Math.PI * 0.7;
+        const speed = 8 + Math.random() * 12;
+        const size  = 14 + Math.random() * 20;
+        particles.push(new EmojiParticle(ex, ey, { angle, speed, size }));
+      }
+    });
+  });
+
+  let i = 0;
+  function spawnStep() {
+    if (i < spawnQueue.length) {
+      spawnQueue[i](); i++;
+      requestAnimationFrame(spawnStep);
+    }
+  }
+  spawnStep();
+
+  const randomMsg = energyMessages[Math.floor(Math.random() * energyMessages.length)];
+  document.getElementById('popupEnergyMsg').innerHTML =
+    `❤️‍🔥 احتفال لمزتي الجميلة ❤️‍🔥<br>${randomMsg}`;
+  showPopup('popup_energy');
+}
+
+function burstAroundProfile(el, e) {
+  const rect = el.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  burstFrom(cx, cy, 22, [5, 13], [16, 28]);
+  el.classList.add('ripple-anim');
+  setTimeout(() => el.classList.remove('ripple-anim'), 600);
+}
+
+const MAX_PARTICLES = 400;
+
+function animLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (particles.length > MAX_PARTICLES) {
+    particles.splice(0, particles.length - MAX_PARTICLES);
+  }
+  particles = particles.filter(p => { const a = p.update(); if (a) p.draw(); return a; });
+  requestAnimationFrame(animLoop);
+}
+warmupSprites();
+animLoop();
+/* ══════════════════════════════════════════
+   SOUND
+══════════════════════════════════════════ */
+function playWebOscillatorSound() {
+  try {
+    const AC  = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const ac  = new AC();
+    const osc = ac.createOscillator();
+    const g   = ac.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(160, ac.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(520, ac.currentTime + 0.18);
+    g.gain.setValueAtTime(0.1, ac.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.01, ac.currentTime + 0.18);
+    osc.connect(g); g.connect(ac.destination);
+    osc.start(); osc.stop(ac.currentTime + 0.18);
+  } catch(e) {}
+}
+
+/* ══════════════════════════════════════════
+   STARS + HEARTS
+══════════════════════════════════════════ */
+(function createStars() {
+  const c = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s    = document.createElement('div');
+    s.className = 'star';
+    const sz   = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--delay:${-Math.random()*4}s;`;
+    c.appendChild(s);
+  }
+})();
+
+(function createHearts() {
+  const c  = document.getElementById('heartsContainer');
+  const em = ['💖','💕','💗','💓','💝','✨','🌸','❤️‍🔥','🧸','🎀'];
+  for (let i = 0; i < 14; i++) {
+    const h   = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = em[Math.floor(Math.random() * em.length)];
+    h.style.cssText = `left:${Math.random()*100}%;font-size:${14+Math.random()*14}px;animation-duration:${8+Math.random()*10}s;animation-delay:${-Math.random()*15}s;`;
+    c.appendChild(h);
+  }
+})();
+
+/* ══════════════════════════════════════════
+   POPUP  (overlay في وسط الشاشة)
+══════════════════════════════════════════ */
+let currentPopupId   = null;
+let popupCloseTimer  = null;
+
+function showPopup(id) {
+  playWebOscillatorSound();
+
+  // أغلق أي popup مفتوح
+  if (currentPopupId) _closePopupNow(currentPopupId);
+
+  const overlay = document.getElementById('popupOverlay');
+  const popup   = document.getElementById(id);
+
+  // إخفاء كل البوب آبات
+  document.querySelectorAll('.popup-msg').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('show','hide');
+  });
+
+  overlay.classList.add('show');
+  popup.style.display = 'block';
+  popup.classList.remove('hide');
+  popup.classList.add('show');
+  currentPopupId = id;
+
+  if (popupCloseTimer) clearTimeout(popupCloseTimer);
+  popupCloseTimer = setTimeout(() => closeCurrentPopup(), 5000);
+}
+
+function closeCurrentPopup() {
+  if (!currentPopupId) return;
+  _closePopupNow(currentPopupId);
+  currentPopupId = null;
+}
+
+function _closePopupNow(id) {
+  const popup   = document.getElementById(id);
+  const overlay = document.getElementById('popupOverlay');
+  popup.classList.add('hide');
+  setTimeout(() => {
+    popup.classList.remove('show','hide');
+    popup.style.display = 'none';
+    overlay.classList.remove('show');
+  }, 320);
+}
+
+/* ── handler الصورة الأولى ── */
+function handleProfileClick1(e) {
+  burstAroundProfile(document.getElementById('profileWrap1'), e);
+  showPopup('popup1');
+}
+
+/* ── handler الصورة الثانية ── */
+function handleProfileClick2(e) {
+  burstAroundProfile(document.getElementById('profileWrap2'), e);
+  showPopup('popup2_img');
+}
+
+/* ══════════════════════════════════════════
+   PASSWORD
+══════════════════════════════════════════ */
+function togglePassword() {
+  const inp = document.getElementById('passwordInput');
+  const tog = document.querySelector('.toggle-password');
+  inp.type  = inp.type === 'password' ? 'text' : 'password';
+  tog.textContent = inp.type === 'password' ? '👁' : '🙈';
+  inp.focus();
+}
+
+function checkPassword() {
+  const input   = document.getElementById('passwordInput');
+  const pwd     = input.value.trim();
+  const status  = document.getElementById('statusMsg');
+  const loading = document.getElementById('loadingDots');
+
+  const valid = ['هبة حياتي','بحبك هبة','هبه حياتي','بحبك هبه',
+                 'حبيبتي هبة','هبة','هبه','مامي','مامي حياتي'];
+
+  if (!pwd) {
+    showStatus('اكتبي كلمة السر الأول يا روحي 😂', 'error');
+    shake(input); return;
+  }
+
+  if (valid.includes(pwd)) {
+    showStatus('صح يا روحي 💖 استني ثانية وادخلي لقلبي...', 'success');
+    input.classList.add('pulse');
+    loading.classList.add('show');
+
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.play().then(() => {
+      document.getElementById('musicToggle').classList.remove('hidden');
+    }).catch(() => {
+      // فيه متصفحات بتوقف autoplay – الزر هيهز نفسه كتلميح
+      const btn = document.getElementById('musicToggle');
+      btn.classList.remove('hidden');
+      btn.classList.add('wiggle');
+      setTimeout(() => btn.classList.remove('wiggle'), 700);
+    });
+
+    setTimeout(() => {
+      loading.classList.remove('show');
+      const p1 = document.getElementById('page1');
+      p1.style.opacity   = '0';
+      p1.style.transform = 'translateY(-20px)';
+      setTimeout(() => {
+        p1.classList.add('hidden');
+        const p2 = document.getElementById('page2');
+        p2.classList.remove('hidden');
+        p2.classList.add('page-enter');
+        startCounter();
+        showPopup('popup2');
+      }, 500);
+    }, 2200);
+
+  } else {
+    showStatus('غلط يا هبلة 😂 فكري كويس في الكلمة السحرية أو دلعي 💕', 'error');
+    shake(input);
+    input.value = ''; input.focus();
+  }
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('statusMsg');
+  el.textContent = msg;
+  el.className   = 'status-msg ' + type;
+  setTimeout(() => { el.textContent = ''; el.className = 'status-msg'; }, 5000);
+}
+
+function shake(el) {
+  el.classList.add('shake');
+  setTimeout(() => el.classList.remove('shake'), 450);
+}
+
+/* ══════════════════════════════════════════
+   MUSIC TOGGLE
+══════════════════════════════════════════ */
+function togglePlayMusic() {
+  const bgMusic   = document.getElementById('bgMusic');
+  const musicIcon = document.getElementById('musicIcon');
+  const btn       = document.getElementById('musicToggle');
+  if (bgMusic.paused) {
+    bgMusic.play();
+    musicIcon.className = 'fa-solid fa-volume-high';
+  } else {
+    bgMusic.pause();
+    musicIcon.className = 'fa-solid fa-volume-xmark';
+    btn.classList.add('wiggle');
+    setTimeout(() => btn.classList.remove('wiggle'), 700);
+  }
+}
+
+/* ══════════════════════════════════════════
+   COUNTER  –  مع Flip animation
+══════════════════════════════════════════ */
+let counterInterval;
+const counterPrev = { days: null, hours: null, minutes: null, seconds: null };
+
+function flipNumber(id, newVal) {
+  const el = document.getElementById(id);
+  if (counterPrev[id.replace('count-','')] === newVal) return;
+  counterPrev[id.replace('count-','')] = newVal;
+
+  el.classList.add('flip-out');
+  setTimeout(() => {
+    el.textContent = newVal;
+    el.classList.remove('flip-out');
+    el.classList.add('flip-in');
+    setTimeout(() => el.classList.remove('flip-in'), 200);
+  }, 180);
+}
+
+function startCounter() {
+  const start = new Date('2025-10-30T20:00:00');
+  function update() {
+    const diff = Date.now() - start.getTime();
+    if (diff < 0) return;
+    const days    = Math.floor(diff / 86400000);
+    const hours   = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000)  / 60000);
+    const seconds = Math.floor((diff % 60000)    / 1000);
+    flipNumber('count-days',    days);
+    flipNumber('count-hours',   hours);
+    flipNumber('count-minutes', minutes);
+    flipNumber('count-seconds', seconds);
+  }
+  update();
+  counterInterval = setInterval(update, 1000);
+}
+
+/* ══════════════════════════════════════════
+   LUCKY CARD  –  shuffle ذكي (لا تكرار قبل ما تخلص)
+══════════════════════════════════════════ */
+const secretMessages = [
+  "صباح الجمال على عيون مامي اللي منورة دنيتي 💞 🫣",
+  "يا رب يا هبة تحلي كل امتحاناتك وتفرقعي الدنيا نجاح وتفوق 💃🏻✨",
+  "عيونك دول هما اللي مخليني قادر أستحمل أي حاجة في الدنيا 🥺💓",
+  "بحبك يا رخمتي الجميلة يا دكتورة المستقبل الشطورة 👑🩺",
+  "هانت يا روحي.. خطوة كمان وهتكوني في المكان اللي بتحلمي بيه دايماً ❤️‍🔥",
+  "أنا فخور بيكي في كل حالاتك.. حتى وأنتِ مضغوطة وبتعيطي 🫣💘",
+  "عايزك تطمني خالص.. ربنا مش هيضيع تعبك وسهرك أبداً يا هبة 🌸✨",
+  "روحي اشربي حاجة دافية وارجعي كملي مذاكرة.. أنا مستنيكي دايماً 🧸🎀",
+  "ضحكتك هي اللي بتنورلي طريقي.. اوعي تغيب عن وشك الجميل 🫦💋",
+  "بحبك حب ملوله نهاية ولا حدود يا مامي يا سكر حياتي 💖💍",
+  "شطورتي الشاطرة اللي هترفع راسي في النتيجة قريب جداً 🎊✨",
+  "خليكي واثقة في نفسك زي ما أنا واثق فيكي بالظبط يا عمري 💞🥺",
+  "أنتِ الصدفة الأحلى والأغلى في عمري كله.. ربنا يخليكي ليا 💘🌚",
+  "بوسة كبيرة أوي لقلبك الطيب والنضيف اللي مفيش زيه في الكون 💋❤️",
+  "الامتحانات دي فترة وهتعدي وهنحتفل سوا احتفال كبير أوي أوي 💃🏻🎉",
+  "افتكري دايماً إن فيه قلب هنا بينبض عشانك وبيدعيلك في كل ثانية 🫀✨",
+  "هبة.. أنتِ بطلي الخارق ودكتورتي اللي بتباهى بيها قدام الدنيا كلها 👑🩺",
+  "نامي كويس ومتوتريش نفسك يا روحي.. كلو هيبقى زي الفل 💗 🫣",
+  "بحب عصبيتك ورخامتك وكل تفصيلة تافهة بتعمليها يا مامي 🫦💓",
+  "يومك جميل ومشرق وزي قلبك الطاهر يا أحلى هبة في الكوكب 🌸💖",
+  "أنتِ حلمي الوحيد اللي بتمنى أعيشه واكمل فيه كل يوم 💍💞",
+  "ربنا يوفقك ويسهل عليكي كل سؤال صعب ويذكرك باللي نسيتيه يا نبض قلبي 🥺💘",
+  "متخليش الخوف يسيطر عليكي.. أنتِ أقوى بكتير من أي امتحان 💪❤️‍🔥",
+  "وحشتيني أوي أوي حتى وأنتِ بتذاكري ومشغولة عني بالكتب 🧸🎀",
+  "ضحكتك الحلوة بتخليني أحس إن الدنيا لسه بخير وفيها فرحة 💞🌚",
+  "عيونك هما ملجأي الوحيد وأماني وسندي في الدنيا دي كلها 🥺💗",
+  "هانت يا دكتورة.. كلها كام ليلة وتخلصي تالتة ثانوي وتكوني ملكة 👑✨",
+  "بحبك النهاردة أكتر من امبارح.. وبكرة هحبك أكتر بكتير أوي 💘💋",
+  "شدي حيلك يا بطلة.. أنا مستني اللحظة اللي هفرح وأتطير فيها بيكي من الفرحة 💃🏻🎊",
+  "أنتِ أحسن وأجمل بنت في الدنيا كلها في عيوني وقلبي دايماً 🧸💝",
+  "خدي نفس عميق دلوقتي وافتكري إني بحبك وبفكر فيكي أوي أوي 🫦💞",
+  "هبة.. وجودك في حياتي هو أكبر وأجمل نعمة ربنا رزقني بيها في عمري  💖 💍",
+  "ركزي يا عمري ومتخليش أي حاجة تشتت عقلك.. أنا جمبك وفي ضهرك دايماً 🤍✨",
+  "تعبك ومجهودك دلوقتي هو اللي هيعمل مستقبلك العظيم بكرة يا دكتورة   🩺 🌸",
+  "بموت فيكي وفي تفاصيلك يا مامي يا ملكة قلبي وحياتي 💋💓",
+  "يا رب أشوفك دايماً مبسوطة والضحكة من الودن للودن ومش بتفارق عيونك  🥺 💘",
+  "خليكي عارفة إن زعلك أو تعبك بيكسر قلبي.. اضحكي عشان خاطري 💖 ",
+  "أنتِ نصي التاني اللي بيكملني وبيحلّي أيامي الصعبة 💕🌟",
+  "ببعتلك دلوقتي حضن دافي وكبير أوي يشحن طاقتك ويطمن قلبك الحائر 🧸💞",
+  "شطورتي الجميلة اللي مفيش في ذكائها واتقانها وشطارتها اتنين ❤️‍🔥✨",
+  "هانت يا مامي.. الامتحانات دي هتكون مجرد ذكرى تضحكي عليها بكرة وتقولي عدت 💃🏻🎊",
+  "بعشق رنتك وطريقتك وكلامك وكل حاجة بتعمليها معايا 🫦💘",
+  "قلبي معاكي في كل لجنة وكل امتحان وكل ورقة بتمسكيها بيدك 🫀💖",
+  "ربنا يفتح عليكي فتوح العارفين ويسهل عليكي الإجابات المعقدة 🌸✨",
+  "متقلقيش أبداً.. تعبك وسهرك وركضك ورا الدروس مش هيروحوا ع الفاضي 🥺💝",
+  "بحبك يا هبة حب ميتوصفش ولا يتكتب بكلام الدنيا كله 💍💞",
+  "أنتِ نجمتي اللي بتنور سمايا الضلمة وبتديني أمل في بكرة 🌟🌚",
+  "روح قلبي وعقلي وكل دنيتي.. ركزي وبلاش قلق وتوتر ملوش لازمة 💗 ",
+  "نفسي أكون جمبك دلوقتي وأطبطب عليكي وأشيل عنك أي حمل 💪❤️‍🔥",
+  "بوسة رقيقة على جبين دكتورتي الشاطرة والملتزمة بمذاكرتها 💋🩺",
+  "دايماً فخور بيكي وبسعيك وتعبك ووقوفك في وش الصعب يا أغلى ما أملك  🧸✨",
+  "هبة.. أنتِ الحب الأول والأخير ومامي اللي بموت وبعشق ترابها 🫦💘💍"
+];
+
+/* Shuffle pool لتجنب التكرار */
+let messagePool = [];
+function getNextMessage() {
+  if (messagePool.length === 0) {
+    messagePool = [...secretMessages].sort(() => Math.random() - 0.5);
+  }
+  return messagePool.pop();
+}
+
+function pullRandomMessage(e) {
+  playWebOscillatorSound();
+  const cx = e?.clientX || window.innerWidth  / 2;
+  const cy = e?.clientY || window.innerHeight / 2;
+  burstFrom(cx, cy, 40, [5, 14], [14, 28], true);
+
+  const el = document.getElementById('luckyCardText');
+  el.style.opacity = '0';
+  setTimeout(() => {
+    el.textContent   = getNextMessage();
+    el.style.opacity = '1';
+  }, 250);
+}
+
+/* ══════════════════════════════════════════
+   ENERGY MESSAGES
+══════════════════════════════════════════ */
+const energyMessages = [
+  "شطورتي الجميلة اللي هتجيب أعلى مجموع وتفرقع تالتة ثانوي!🏻💃  ✨",
+  "روح قلبي خدي بريك دقيقتين، اشربي مياه، وافتكري إني دايماً معاكِ وبحبك 🧸🎀💋",
+  "عارف إن الامتحانات توتر وقلق، بس عيونك وضحكتك أهم من أي امتحان في الدنيا 🥺💓💘",
+  "يا دكتورة المستقبل الشاطرة.. هانت خالص وبكرة تفرحي وتفرحيني معاكِ ❤️‍🔥👑🎊",
+  "بحب رخامتك، تفاصيلك، وشطارتك.. روحي كملي مذاكرة مستنيكي تخلصي!🧸🫦💍",
+  "كل سطر بتذاكريه دلوقتي خطوة بتقربك من حلمك العظيم.. أنا واثق فيكِ يا روحي ✨💗🌚"
+];
+
+/* ══════════════════════════════════════════
+   GO BACK
+══════════════════════════════════════════ */
+function goBack() {
+  if (counterInterval) clearInterval(counterInterval);
+  Object.keys(counterPrev).forEach(k => counterPrev[k] = null);
+
+  const p2 = document.getElementById('page2');
+  p2.style.opacity   = '0';
+  p2.style.transform = 'translateY(20px)';
+  setTimeout(() => {
+    p2.classList.add('hidden');
+    p2.classList.remove('page-enter');
+    p2.style.opacity = p2.style.transform = '';
+    const p1 = document.getElementById('page1');
+    p1.classList.remove('hidden');
+    p1.style.opacity = '1';
+    p1.style.transform = '';
+  }, 400);
+
+  const bg = document.getElementById('bgMusic');
+  bg.pause(); bg.currentTime = 0;
+  document.getElementById('musicToggle').classList.add('hidden');
+  document.getElementById('passwordInput').value = '';
+  setTimeout(() => document.getElementById('passwordInput').focus(), 450);
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+document.getElementById('passwordInput').addEventListener('keypress', e => {
+  if (e.key === 'Enter') checkPassword();
+});
+window.onload = () => document.getElementById('passwordInput').focus();
+
+//داله التثبيت  
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then((reg) => console.log('جاري التشغيل وجاهز للتثبيت بنجاح! Scope:', reg.scope))
+      .catch(err => console.log('فيه مشكلة في الـ SW:', err));
+  });
+}
+
+</script>
+</body>
+</html>
